@@ -1,25 +1,22 @@
 fileFormatVersion: 2
-guid: fe01b63658b1a4d44a6ab548b0d92277
+guid: 3596c015ae874d745bae5020dec94bf7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1370150288747598966
-    second: Building_0
+      213: 1137505848240742961
+    second: Main_Cloud_Left_0
   - first:
-      213: 961210159572563268
-    second: Building_1
+      213: -3832914135531921902
+    second: Main_Cloud_Left_1
   - first:
-      213: 8527704022205132460
-    second: Building_2
+      213: -5780048318004620627
+    second: Main_Cloud_Left_2
   - first:
-      213: -1706636390946437097
-    second: Building_3
+      213: -7256639632867018750
+    second: Main_Cloud_Left_3
   - first:
-      213: -4549087368393172227
-    second: Building_4
-  - first:
-      213: 6163353665255179149
-    second: Building_5
+      213: -3362573392039854008
+    second: Main_Cloud_Left_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -52,10 +49,10 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 0
+    wrapU: 1
     wrapV: 1
     wrapW: 1
   nPOTScale: 0
@@ -63,7 +60,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -90,7 +87,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -128,13 +125,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Building_0
+      name: Main_Cloud_Left_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 773
-        height: 194
+        y: 828
+        width: 474
+        height: 166
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,20 +140,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a8bec4e529f3cfce0800000000000000
-      internalID: -1370150288747598966
+      spriteID: 132a15eca8b39cf00800000000000000
+      internalID: 1137505848240742961
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Building_1
+      name: Main_Cloud_Left_1
       rect:
         serializedVersion: 2
-        x: 49
-        y: 183
-        width: 14
-        height: 11
+        x: 275
+        y: 775
+        width: 53
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -165,20 +162,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 445b1d32c87e65d00800000000000000
-      internalID: 961210159572563268
+      spriteID: 21edb01c6e0cecac0800000000000000
+      internalID: -3832914135531921902
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Building_2
+      name: Main_Cloud_Left_2
       rect:
         serializedVersion: 2
-        x: 62
-        y: 184
-        width: 13
-        height: 10
+        x: 125
+        y: 656
+        width: 337
+        height: 92
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,20 +184,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: caee43160ad785670800000000000000
-      internalID: 8527704022205132460
+      spriteID: da29db4cda429cfa0800000000000000
+      internalID: -5780048318004620627
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Building_3
+      name: Main_Cloud_Left_3
       rect:
         serializedVersion: 2
-        x: 231
-        y: 184
-        width: 7
-        height: 9
+        x: 393
+        y: 527
+        width: 359
+        height: 101
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -209,20 +206,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 71802ec9e3fc058e0800000000000000
-      internalID: -1706636390946437097
+      spriteID: 208b0f383bc3b4b90800000000000000
+      internalID: -7256639632867018750
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Building_4
+      name: Main_Cloud_Left_4
       rect:
         serializedVersion: 2
-        x: 278
-        y: 182
-        width: 6
-        height: 10
+        x: 29
+        y: 318
+        width: 484
+        height: 147
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -231,30 +228,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dfa55baf3256ed0c0800000000000000
-      internalID: -4549087368393172227
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Building_5
-      rect:
-        serializedVersion: 2
-        x: 611
-        y: 175
-        width: 9
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d8303a2f081a88550800000000000000
-      internalID: 6163353665255179149
+      spriteID: 840c84cc05db551d0800000000000000
+      internalID: -3362573392039854008
       vertices: []
       indices: 
       edges: []
@@ -273,12 +248,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Building_0: -1370150288747598966
-      Building_1: 961210159572563268
-      Building_2: 8527704022205132460
-      Building_3: -1706636390946437097
-      Building_4: -4549087368393172227
-      Building_5: 6163353665255179149
+      Main_Cloud_Left_0: 1137505848240742961
+      Main_Cloud_Left_1: -3832914135531921902
+      Main_Cloud_Left_2: -5780048318004620627
+      Main_Cloud_Left_3: -7256639632867018750
+      Main_Cloud_Left_4: -3362573392039854008
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

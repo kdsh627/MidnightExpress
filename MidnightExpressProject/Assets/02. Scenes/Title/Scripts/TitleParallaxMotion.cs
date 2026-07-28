@@ -11,13 +11,9 @@ public sealed class TitleParallaxMotion : MonoBehaviour
     [Header("Scene reference")]
     [SerializeField] private Camera titleCamera;
 
-    [Header("Layer speeds")]
-    [Min(0f)] [SerializeField] private float skySpeed = 0.08f;
-    [Min(0f)] [SerializeField] private float cloudSpeed = 0.32f;
-    [Min(0f)] [SerializeField] private float buildingSpeed = 1.35f;
-    [Min(0f)] [SerializeField] private float railSpeed = 6.5f;
-    [Min(0f)] [SerializeField] private float railSeamOverlap = 0.75f;
-    [SerializeField] private Vector2 cloudRespawnGap = new Vector2(1.5f, 4f);
+    [Header("Material-scrolled repeating layers")]
+    [Tooltip("Each renderer keeps its transform fixed. Its repeat material is moved only with a UV offset.")]
+    [SerializeField] private List<ScrollingLayer> scrollingLayers = new List<ScrollingLayer>();
 
     [Header("Speed ramp")]
     [Min(0.01f)] [SerializeField] private float speedRampDuration = 3.5f;
@@ -40,13 +36,28 @@ public sealed class TitleParallaxMotion : MonoBehaviour
     [Min(1f)] [SerializeField] private float streakPixelsPerUnit = 100f;
     [SerializeField] private int randomSeed = 1977;
 
-    private sealed class LoopingLayer
+    [Serializable]
+    private sealed class ScrollingLayer
     {
-        public Transform[] Items;
-        public float[] LogicalX;
-        public float Width;
+        [Tooltip("Inspector label only.")]
+        public string Name;
+        [Tooltip("The SpriteRenderer stays fixed while its material UV scrolls.")]
+        public SpriteRenderer Renderer;
+        [Tooltip("A material using MidnightExpress/Title/Repeat Scroll Sprite Lit.")]
+        public Material Material;
+        [Min(0f)]
+        [Tooltip("Visual movement speed in world units per second.")]
         public float Speed;
-        public float PixelsPerUnit;
+        [Min(0.01f)]
+        [Tooltip("Horizontal texture repetitions across the renderer. Usually 1.")]
+        public float TilingX = 1f;
+
+        [NonSerialized] public Material StartMaterial;
+        [NonSerialized] public MaterialPropertyBlock StartPropertyBlock;
+        [NonSerialized] public MaterialPropertyBlock RuntimePropertyBlock;
+        [NonSerialized] public float RepeatWorldWidth;
+        [NonSerialized] public float Offset;
+        [NonSerialized] public bool Initialized;
     }
 
     private sealed class SpeedStreak
@@ -59,19 +70,24 @@ public sealed class TitleParallaxMotion : MonoBehaviour
         public float Cooldown;
     }
 
-    private readonly List<LoopingLayer> layers = new List<LoopingLayer>();
     private readonly List<SpeedStreak> streaks = new List<SpeedStreak>();
+    private static readonly int TilingXId = Shader.PropertyToID("_TilingX");
+    private static readonly int ScrollOffsetId = Shader.PropertyToID("_ScrollOffset");
+
     private System.Random random;
 
-    private Transform cloud;
-    private float cloudLogicalX;
-    private float cloudHalfWidth;
-    private float cloudPixelsPerUnit = 100f;
     private Texture2D streakTexture;
     private Sprite streakSprite;
+    private bool runtimeInitialized;
 
-    private void Awake()
+    private void OnEnable()
     {
+        if (!Application.isPlaying || runtimeInitialized)
+        {
+            return;
+        }
+
+        CleanupOrphanedSpeedStreaks();
         random = new System.Random(randomSeed);
         titleCamera ??= FindComponentInScene<Camera>("Main Camera");
         if (titleCamera == null)
@@ -80,146 +96,102 @@ public sealed class TitleParallaxMotion : MonoBehaviour
             return;
         }
 
-        AddLoopingLayer("Sky", skySpeed);
-        SetupCloud();
-        AddLoopingLayer("Buildings", buildingSpeed);
-        AddLoopingLayer("Rail", railSpeed, railSeamOverlap);
+        SetupScrollingLayers();
         CreateSpeedStreaks();
+        runtimeInitialized = true;
     }
 
     private void Update()
     {
+        if (!runtimeInitialized)
+        {
+            return;
+        }
+
         var deltaTime = Time.deltaTime;
         var ramp = Mathf.SmoothStep(
             speedRampStart,
             1f,
             Mathf.Clamp01(Time.timeSinceLevelLoad / speedRampDuration));
 
-        for (var i = 0; i < layers.Count; i++)
+        for (var i = 0; i < scrollingLayers.Count; i++)
         {
-            TickLayer(layers[i], deltaTime, ramp);
+            TickScrollingLayer(scrollingLayers[i], deltaTime, ramp);
         }
 
-        TickCloud(deltaTime, ramp);
         TickSpeedStreaks(deltaTime, ramp);
     }
 
-    private void AddLoopingLayer(string objectName, float speed, float seamOverlap = 0f)
+    private void SetupScrollingLayers()
     {
-        var source = FindComponentInScene<SpriteRenderer>(objectName);
-        if (source == null || source.sprite == null)
+        for (var i = 0; i < scrollingLayers.Count; i++)
+        {
+            var layer = scrollingLayers[i];
+            if (layer == null || layer.Renderer == null || layer.Renderer.sprite == null)
+            {
+                continue;
+            }
+
+            var repeatMaterial = layer.Material != null
+                ? layer.Material
+                : layer.Renderer.sharedMaterial;
+            if (repeatMaterial == null ||
+                !repeatMaterial.HasProperty(TilingXId) ||
+                !repeatMaterial.HasProperty(ScrollOffsetId))
+            {
+                Debug.LogWarning(
+                    $"Title parallax layer '{layer.Name}' needs a repeat-scroll material.",
+                    layer.Renderer);
+                continue;
+            }
+
+            layer.StartMaterial = layer.Renderer.sharedMaterial;
+            layer.StartPropertyBlock = new MaterialPropertyBlock();
+            layer.Renderer.GetPropertyBlock(layer.StartPropertyBlock);
+
+            layer.RuntimePropertyBlock = new MaterialPropertyBlock();
+            layer.Renderer.GetPropertyBlock(layer.RuntimePropertyBlock);
+            layer.Renderer.sharedMaterial = repeatMaterial;
+
+            var scaleX = Mathf.Max(
+                0.0001f,
+                Mathf.Abs(layer.Renderer.transform.lossyScale.x));
+            layer.RepeatWorldWidth = Mathf.Max(
+                0.01f,
+                layer.Renderer.sprite.bounds.size.x * scaleX);
+            layer.Offset = 0f;
+
+            layer.RuntimePropertyBlock.SetFloat(
+                TilingXId,
+                Mathf.Max(0.01f, layer.TilingX));
+            layer.RuntimePropertyBlock.SetFloat(ScrollOffsetId, 0f);
+            layer.Renderer.SetPropertyBlock(layer.RuntimePropertyBlock);
+            layer.Initialized = true;
+        }
+    }
+
+    private static void TickScrollingLayer(
+        ScrollingLayer layer,
+        float deltaTime,
+        float ramp)
+    {
+        if (layer == null ||
+            !layer.Initialized ||
+            layer.Renderer == null ||
+            layer.RuntimePropertyBlock == null)
         {
             return;
         }
 
-        var width = Mathf.Max(0.01f, source.bounds.size.x - seamOverlap);
-        var cameraWidth = titleCamera.orthographicSize * titleCamera.aspect * 2f;
-        var copyCount = Mathf.Max(3, Mathf.CeilToInt(cameraWidth / width) + 2);
+        var tilingX = Mathf.Max(0.01f, layer.TilingX);
+        var uvPerWorldUnit = tilingX / layer.RepeatWorldWidth;
+        layer.Offset = Mathf.Repeat(
+            layer.Offset + layer.Speed * ramp * deltaTime * uvPerWorldUnit,
+            1f);
 
-        if (copyCount % 2 == 0)
-        {
-            copyCount++;
-        }
-
-        var layer = new LoopingLayer
-        {
-            Items = new Transform[copyCount],
-            LogicalX = new float[copyCount],
-            Width = width,
-            Speed = speed,
-            PixelsPerUnit = source.sprite.pixelsPerUnit
-        };
-
-        var middle = copyCount / 2;
-        var sourcePosition = source.transform.position;
-
-        for (var i = 0; i < copyCount; i++)
-        {
-            var offset = i - middle;
-            Transform item;
-
-            if (offset == 0)
-            {
-                item = source.transform;
-            }
-            else
-            {
-                var clone = Instantiate(source.gameObject, source.transform.parent);
-                clone.name = objectName + "_Loop_" + offset;
-                clone.hideFlags = HideFlags.DontSave;
-                item = clone.transform;
-            }
-
-            var position = sourcePosition + Vector3.right * (width * offset);
-            item.position = position;
-            layer.Items[i] = item;
-            layer.LogicalX[i] = position.x;
-        }
-
-        layers.Add(layer);
-    }
-
-    private void TickLayer(LoopingLayer layer, float deltaTime, float ramp)
-    {
-        var cameraLeft = titleCamera.transform.position.x - titleCamera.orthographicSize * titleCamera.aspect;
-        var maxX = layer.LogicalX[0];
-
-        for (var i = 1; i < layer.LogicalX.Length; i++)
-        {
-            maxX = Mathf.Max(maxX, layer.LogicalX[i]);
-        }
-
-        for (var i = 0; i < layer.Items.Length; i++)
-        {
-            layer.LogicalX[i] -= layer.Speed * ramp * deltaTime;
-
-            if (layer.LogicalX[i] + layer.Width * 0.5f < cameraLeft)
-            {
-                layer.LogicalX[i] = maxX + layer.Width;
-                maxX = layer.LogicalX[i];
-            }
-
-            var position = layer.Items[i].position;
-            position.x = SnapToPixel(layer.LogicalX[i], layer.PixelsPerUnit);
-            layer.Items[i].position = position;
-        }
-    }
-
-    private void SetupCloud()
-    {
-        var renderer = FindComponentInScene<SpriteRenderer>("Cloud");
-        if (renderer == null || renderer.sprite == null)
-        {
-            return;
-        }
-
-        cloud = renderer.transform;
-        cloudLogicalX = cloud.position.x;
-        cloudHalfWidth = renderer.bounds.extents.x;
-        cloudPixelsPerUnit = renderer.sprite.pixelsPerUnit;
-    }
-
-    private void TickCloud(float deltaTime, float ramp)
-    {
-        if (cloud == null)
-        {
-            return;
-        }
-
-        cloudLogicalX -= cloudSpeed * ramp * deltaTime;
-
-        var cameraHalfWidth = titleCamera.orthographicSize * titleCamera.aspect;
-        var cameraLeft = titleCamera.transform.position.x - cameraHalfWidth;
-        var cameraRight = titleCamera.transform.position.x + cameraHalfWidth;
-
-        if (cloudLogicalX + cloudHalfWidth < cameraLeft)
-        {
-            cloudLogicalX = cameraRight + cloudHalfWidth + RandomRange(cloudRespawnGap);
-        }
-
-        var position = cloud.position;
-        position.x = SnapToPixel(cloudLogicalX, cloudPixelsPerUnit);
-        cloud.position = position;
+        layer.RuntimePropertyBlock.SetFloat(TilingXId, tilingX);
+        layer.RuntimePropertyBlock.SetFloat(ScrollOffsetId, layer.Offset);
+        layer.Renderer.SetPropertyBlock(layer.RuntimePropertyBlock);
     }
 
     private void CreateSpeedStreaks()
@@ -328,17 +300,111 @@ public sealed class TitleParallaxMotion : MonoBehaviour
         streak.Transform.localScale = new Vector3(streak.Length, thickness * streakTextureWidth, 1f);
     }
 
+    private void OnDisable()
+    {
+        RestoreScrollingLayers();
+        CleanupSpeedStreaks();
+        runtimeInitialized = false;
+    }
+
     private void OnDestroy()
     {
+        RestoreScrollingLayers();
+        CleanupSpeedStreaks();
+    }
+
+    private void RestoreScrollingLayers()
+    {
+        for (var i = 0; i < scrollingLayers.Count; i++)
+        {
+            var layer = scrollingLayers[i];
+            if (layer == null || !layer.Initialized)
+            {
+                continue;
+            }
+
+            if (layer.Renderer != null)
+            {
+                layer.Renderer.sharedMaterial = layer.StartMaterial;
+                layer.Renderer.SetPropertyBlock(layer.StartPropertyBlock);
+            }
+
+            layer.StartMaterial = null;
+            layer.StartPropertyBlock = null;
+            layer.RuntimePropertyBlock = null;
+            layer.RepeatWorldWidth = 0f;
+            layer.Offset = 0f;
+            layer.Initialized = false;
+        }
+    }
+
+    private void CleanupSpeedStreaks()
+    {
+        for (var i = streaks.Count - 1; i >= 0; i--)
+        {
+            if (streaks[i]?.Transform != null)
+            {
+                DestroyRuntimeObject(streaks[i].Transform.gameObject);
+            }
+        }
+
+        streaks.Clear();
+
         if (streakSprite != null)
         {
-            Destroy(streakSprite);
+            DestroyRuntimeObject(streakSprite);
+            streakSprite = null;
         }
 
         if (streakTexture != null)
         {
-            Destroy(streakTexture);
+            DestroyRuntimeObject(streakTexture);
+            streakTexture = null;
         }
+    }
+
+    private void CleanupOrphanedSpeedStreaks()
+    {
+        for (var i = transform.childCount - 1; i >= 0; i--)
+        {
+            var child = transform.GetChild(i);
+            if (child.name.StartsWith("SpeedStreak_", StringComparison.Ordinal))
+            {
+                DestroyOrphanImmediately(child.gameObject);
+            }
+        }
+    }
+
+    private static void DestroyOrphanImmediately(UnityEngine.Object target)
+    {
+        if (target == null)
+        {
+            return;
+        }
+
+#if UNITY_EDITOR
+        DestroyImmediate(target);
+#else
+        Destroy(target);
+#endif
+    }
+
+    private static void DestroyRuntimeObject(UnityEngine.Object target)
+    {
+        if (target == null)
+        {
+            return;
+        }
+
+#if UNITY_EDITOR
+        if (!Application.isPlaying || !UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode)
+        {
+            DestroyImmediate(target);
+            return;
+        }
+#endif
+
+        Destroy(target);
     }
 
     private float RandomRange(float minimum, float maximum)

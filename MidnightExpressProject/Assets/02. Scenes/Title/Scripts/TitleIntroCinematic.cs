@@ -11,6 +11,7 @@ public sealed class TitleIntroCinematic : MonoBehaviour
     [SerializeField] private RectTransform blackTop;
     [SerializeField] private RectTransform blackBottom;
     [SerializeField] private Transform trail;
+    [SerializeField] private SpriteRenderer logo;
 
     [Header("Intro")]
     [Min(0.01f)] [SerializeField] private float introDuration = 4f;
@@ -21,6 +22,12 @@ public sealed class TitleIntroCinematic : MonoBehaviour
     [SerializeField] private float blackTopStartY = 540f;
     [SerializeField] private float blackBottomStartY = -540f;
     [SerializeField] private float letterboxEndY;
+
+    [Header("Logo reveal")]
+    [Min(0f)] [SerializeField] private float logoFadeDelay;
+    [Min(0.01f)] [SerializeField] private float logoFadeDuration = 0.8f;
+    [SerializeField] private AnimationCurve logoFadeCurve =
+        AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
 
     [Header("Train shake")]
     [Min(0f)] [SerializeField] private float jointCycleFrequency = 2.25f;
@@ -38,7 +45,10 @@ public sealed class TitleIntroCinematic : MonoBehaviour
     private Vector2 blackBottomStart;
     private Vector3 trailStartPosition;
     private Quaternion trailStartRotation;
+    private Color logoStartColor;
     private float elapsed;
+    private float logoFadeElapsed;
+    private bool logoInitialized;
 
     private void Awake()
     {
@@ -46,6 +56,7 @@ public sealed class TitleIntroCinematic : MonoBehaviour
         blackTop ??= FindComponentInScene<RectTransform>("Black1");
         blackBottom ??= FindComponentInScene<RectTransform>("Black2");
         trail ??= FindComponentInScene<Transform>("Trail");
+        logo ??= FindComponentInScene<SpriteRenderer>("Logo");
 
         if (titleCamera != null)
         {
@@ -69,11 +80,19 @@ public sealed class TitleIntroCinematic : MonoBehaviour
             trailStartPosition = trail.localPosition;
             trailStartRotation = trail.localRotation;
         }
+
+        if (logo != null)
+        {
+            logoStartColor = logo.color;
+            logoInitialized = true;
+            SetLogoAlpha(0f);
+        }
     }
 
     private void Update()
     {
         AnimateIntro();
+        AnimateLogoReveal();
         ShakeTrail();
     }
 
@@ -98,6 +117,36 @@ public sealed class TitleIntroCinematic : MonoBehaviour
             var target = new Vector2(blackBottomStart.x, letterboxEndY);
             blackBottom.anchoredPosition = Vector2.Lerp(blackBottomStart, target, progress);
         }
+    }
+
+    private void AnimateLogoReveal()
+    {
+        if (!logoInitialized || logo == null)
+        {
+            return;
+        }
+
+        if (elapsed < introDuration)
+        {
+            SetLogoAlpha(0f);
+            return;
+        }
+
+        logoFadeElapsed += Time.deltaTime;
+        var progress = Mathf.Clamp01(
+            (logoFadeElapsed - logoFadeDelay) /
+            Mathf.Max(0.01f, logoFadeDuration));
+        var curvedProgress = logoFadeCurve != null
+            ? logoFadeCurve.Evaluate(progress)
+            : progress;
+        SetLogoAlpha(curvedProgress);
+    }
+
+    private void SetLogoAlpha(float normalizedAlpha)
+    {
+        var color = logoStartColor;
+        color.a *= Mathf.Clamp01(normalizedAlpha);
+        logo.color = color;
     }
 
     private void ShakeTrail()
@@ -128,6 +177,14 @@ public sealed class TitleIntroCinematic : MonoBehaviour
         // Keep X/Z and every rotation axis fixed; only the local Y position jolts.
         trail.localPosition = new Vector3(trailStartPosition.x, trailStartPosition.y + verticalJolt, trailStartPosition.z);
         trail.localRotation = trailStartRotation;
+    }
+
+    private void OnDisable()
+    {
+        if (logoInitialized && logo != null)
+        {
+            logo.color = logoStartColor;
+        }
     }
 
     private T FindComponentInScene<T>(string objectName) where T : Component
