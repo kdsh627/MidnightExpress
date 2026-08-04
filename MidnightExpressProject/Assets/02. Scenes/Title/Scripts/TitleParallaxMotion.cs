@@ -56,6 +56,7 @@ public sealed class TitleParallaxMotion : MonoBehaviour
         [NonSerialized] public MaterialPropertyBlock StartPropertyBlock;
         [NonSerialized] public MaterialPropertyBlock RuntimePropertyBlock;
         [NonSerialized] public float RepeatWorldWidth;
+        [NonSerialized] public float MirroredUvDirection = 1f;
         [NonSerialized] public float Offset;
         [NonSerialized] public bool Initialized;
     }
@@ -153,12 +154,15 @@ public sealed class TitleParallaxMotion : MonoBehaviour
             layer.Renderer.GetPropertyBlock(layer.RuntimePropertyBlock);
             layer.Renderer.sharedMaterial = repeatMaterial;
 
-            var scaleX = Mathf.Max(
-                0.0001f,
-                Mathf.Abs(layer.Renderer.transform.lossyScale.x));
+            var signedScaleX = layer.Renderer.transform.lossyScale.x;
+            var scaleX = Mathf.Max(0.0001f, Mathf.Abs(signedScaleX));
             layer.RepeatWorldWidth = Mathf.Max(
                 0.01f,
                 layer.Renderer.sprite.bounds.size.x * scaleX);
+            // A negative X scale mirrors geometry, which reverses the apparent
+            // UV scroll direction. Compensate so every positive Speed moves
+            // the layer in the same screen-space direction.
+            layer.MirroredUvDirection = signedScaleX < 0f ? -1f : 1f;
             layer.Offset = 0f;
 
             layer.RuntimePropertyBlock.SetFloat(
@@ -186,7 +190,12 @@ public sealed class TitleParallaxMotion : MonoBehaviour
         var tilingX = Mathf.Max(0.01f, layer.TilingX);
         var uvPerWorldUnit = tilingX / layer.RepeatWorldWidth;
         layer.Offset = Mathf.Repeat(
-            layer.Offset + layer.Speed * ramp * deltaTime * uvPerWorldUnit,
+            layer.Offset +
+            layer.Speed *
+            layer.MirroredUvDirection *
+            ramp *
+            deltaTime *
+            uvPerWorldUnit,
             1f);
 
         layer.RuntimePropertyBlock.SetFloat(TilingXId, tilingX);
@@ -333,6 +342,7 @@ public sealed class TitleParallaxMotion : MonoBehaviour
             layer.StartPropertyBlock = null;
             layer.RuntimePropertyBlock = null;
             layer.RepeatWorldWidth = 0f;
+            layer.MirroredUvDirection = 1f;
             layer.Offset = 0f;
             layer.Initialized = false;
         }
