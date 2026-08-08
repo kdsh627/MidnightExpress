@@ -1,11 +1,12 @@
+using System;
 using System.Collections;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /// <summary>
 /// Turns the split Start ticket artwork into a button, tears it at the
-/// perforation, then loads the configured game scene.
+/// perforation, then requests the centralized scene flow.
 /// </summary>
 [RequireComponent(typeof(Button))]
 public sealed class StartTicketButton : MonoBehaviour
@@ -41,11 +42,8 @@ public sealed class StartTicketButton : MonoBehaviour
     [Range(0f, 1f)] [SerializeField] private float fadeStart = 0.08f;
     [Range(0f, 1f)] [SerializeField] private float fadeEnd = 0.85f;
 
-    [Header("Game start")]
-    [Tooltip("Optional scene path or scene name. When empty, build index 1 is used.")]
-    [SerializeField] private string targetScene;
-
     private Button button;
+    private SceneFlowController sceneFlow;
     private Graphic leftGraphic;
     private Graphic rightGraphic;
     private Graphic labelGraphic;
@@ -60,23 +58,53 @@ public sealed class StartTicketButton : MonoBehaviour
     private Color rightStartColor;
     private Color labelStartColor;
     private bool isPlaying;
+    private bool isInitialized;
 
-    private void Awake()
+    public void Initialize(SceneFlowController flowController)
     {
+        if (isInitialized)
+        {
+            return;
+        }
+
+        sceneFlow = flowController ?? throw new ArgumentNullException(nameof(flowController));
         ResolveReferences();
+
+        if (leftPiece == null || rightPiece == null || startLabel == null)
+        {
+            throw new InvalidOperationException("StartTicketButton is missing one or more ticket piece references.");
+        }
+
         CacheInitialState();
         button = GetComponent<Button>();
         button.transition = Selectable.Transition.None;
         button.targetGraphic = rightGraphic;
         button.onClick.AddListener(PlayAndStartGame);
+        isInitialized = true;
     }
 
-    private void OnDestroy()
+    public void Shutdown()
     {
+        if (this == null)
+        {
+            return;
+        }
+
+        StopAllCoroutines();
+
         if (button != null)
         {
             button.onClick.RemoveListener(PlayAndStartGame);
         }
+
+        isPlaying = false;
+        isInitialized = false;
+        sceneFlow = null;
+    }
+
+    private void OnDestroy()
+    {
+        Shutdown();
     }
 
     public void PlayAndStartGame()
@@ -94,6 +122,11 @@ public sealed class StartTicketButton : MonoBehaviour
 
     public void ResetTicket()
     {
+        if (!isInitialized)
+        {
+            return;
+        }
+
         StopAllCoroutines();
         isPlaying = false;
 
@@ -117,7 +150,7 @@ public sealed class StartTicketButton : MonoBehaviour
 
     private void BeginTear(bool startGameAfterTear)
     {
-        if (isPlaying || leftPiece == null || rightPiece == null || startLabel == null)
+        if (!isInitialized || isPlaying || leftPiece == null || rightPiece == null || startLabel == null)
         {
             return;
         }
@@ -133,8 +166,9 @@ public sealed class StartTicketButton : MonoBehaviour
         yield return AnimateTear();
         yield return AnimateExit();
 
-        if (startGameAfterTear && TryLoadGameScene())
+        if (startGameAfterTear)
         {
+            StartGameAsync().Forget();
             yield break;
         }
 
@@ -229,26 +263,24 @@ public sealed class StartTicketButton : MonoBehaviour
         }
     }
 
-    private bool TryLoadGameScene()
+    private async UniTask StartGameAsync()
     {
-        if (!string.IsNullOrWhiteSpace(targetScene) &&
-            Application.CanStreamedLevelBeLoaded(targetScene))
+        try
         {
-            SceneManager.LoadSceneAsync(targetScene, LoadSceneMode.Single);
-            return true;
+            var accepted = await sceneFlow.GoToGameEntryAsync();
+            if (!accepted && this != null)
+            {
+                ResetTicket();
+            }
         }
-
-        if (SceneManager.sceneCountInBuildSettings > 1 &&
-            Application.CanStreamedLevelBeLoaded(1))
+        catch (Exception exception)
         {
-            SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
-            return true;
+            Debug.LogException(exception, this);
+            if (this != null)
+            {
+                ResetTicket();
+            }
         }
-
-        Debug.LogWarning(
-            "[StartTicket] Game scene is not available. Add it after Title in Build Settings " +
-            "or assign its path to StartTicketButton.targetScene.");
-        return false;
     }
 
     private void ApplyLabelPose(Vector2 rightOffset, float rightAngle)

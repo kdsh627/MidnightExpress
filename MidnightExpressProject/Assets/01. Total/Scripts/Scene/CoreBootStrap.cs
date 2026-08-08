@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using System.IO;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -6,19 +7,21 @@ using UnityEngine;
 [InitializeOnLoad]
 public static class CoreBootStrap
 {
-    public static string RequestedStartSceneName 
-    { 
-        get => SessionState.GetString("RequestedStartSceneName", ""); 
-        private set => SessionState.SetString("RequestedStartSceneName", value); 
+    private const string BootstrapSceneName = "BootstrapScene";
+    private const string RequestedNameKey = "MidnightExpress.RequestedStartSceneName";
+    private const string RequestedPathKey = "MidnightExpress.RequestedStartScenePath";
+
+    public static string RequestedStartSceneName
+    {
+        get => SessionState.GetString(RequestedNameKey, string.Empty);
+        private set => SessionState.SetString(RequestedNameKey, value);
     }
 
-    public static string RequestedStartScenePath 
-    { 
-        get => SessionState.GetString("RequestedStartScenePath", ""); 
-        private set => SessionState.SetString("RequestedStartScenePath", value); 
+    public static string RequestedStartScenePath
+    {
+        get => SessionState.GetString(RequestedPathKey, string.Empty);
+        private set => SessionState.SetString(RequestedPathKey, value);
     }
-
-    public const string playFromBaseKey = "CoreBootStrap.PlayFromBaseScene";
 
     static CoreBootStrap()
     {
@@ -29,33 +32,67 @@ public static class CoreBootStrap
     private static void OnPlayModeStateChanged(PlayModeStateChange state)
     {
         if (state != PlayModeStateChange.ExitingEditMode)
+        {
             return;
-        
+        }
 
-        RequestedStartSceneName = EditorSceneManager.GetActiveScene().name;
-        RequestedStartScenePath = EditorSceneManager.GetActiveScene().path;
-        Debug.Log(RequestedStartSceneName);
+        var activeScene = EditorSceneManager.GetActiveScene();
+        RequestedStartSceneName = activeScene.name;
+        RequestedStartScenePath = activeScene.path;
 
-        if(!ToolbarPlayButtonsView.OnGetCoreMode)
+        if (!ToolbarPlayButtonsView.OnGetCoreMode)
         {
             EditorSceneManager.playModeStartScene = null;
             return;
         }
 
-        // 체크박스 ON이면: 기존 로직
+        var bootstrapPath = FindBootstrapScenePath();
+        if (string.IsNullOrEmpty(bootstrapPath))
+        {
+            Debug.LogError(
+                $"[CoreBootStrap] Enabled scene '{BootstrapSceneName}' was not found in Build Settings.");
+            EditorSceneManager.playModeStartScene = null;
+            return;
+        }
 
-        var pathOfFirstScene = EditorBuildSettings.scenes[0].path;
-        var sceneAsset = AssetDatabase.LoadAssetAtPath<SceneAsset>(pathOfFirstScene);
-
+        var sceneAsset = AssetDatabase.LoadAssetAtPath<SceneAsset>(bootstrapPath);
         if (sceneAsset == null)
         {
-            Debug.LogError($"[CoreBootStrap] BuildSettings 0 scene not found: {pathOfFirstScene}");
+            Debug.LogError($"[CoreBootStrap] Bootstrap scene asset was not found: {bootstrapPath}");
             EditorSceneManager.playModeStartScene = null;
             return;
         }
 
         EditorSceneManager.playModeStartScene = sceneAsset;
-        Debug.Log($"[CoreBootStrap] ON -> start from base. requested: {RequestedStartSceneName}");
+        Debug.Log($"[CoreBootStrap] Starting from BootstrapScene. Requested scene: {RequestedStartSceneName}");
+    }
+
+    private static string FindBootstrapScenePath()
+    {
+        var scenes = EditorBuildSettings.scenes;
+        for (var index = 0; index < scenes.Length; index++)
+        {
+            var scene = scenes[index];
+            if (!scene.enabled)
+            {
+                continue;
+            }
+
+            if (string.Equals(
+                    Path.GetFileNameWithoutExtension(scene.path),
+                    BootstrapSceneName,
+                    System.StringComparison.Ordinal))
+            {
+                if (index != 0)
+                {
+                    Debug.LogWarning("[CoreBootStrap] BootstrapScene should be Build Settings index 0.");
+                }
+
+                return scene.path;
+            }
+        }
+
+        return string.Empty;
     }
 }
 #endif

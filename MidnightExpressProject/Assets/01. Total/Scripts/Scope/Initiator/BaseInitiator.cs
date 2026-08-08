@@ -1,36 +1,44 @@
-using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using VContainer;
 
-public class BaseInitiator : IInitiator
+public sealed class BaseInitiator : IInitiator
 {
-    private readonly SceneTransitionManager _transitionManager;
+    private readonly SceneFlowController _sceneFlow;
     private readonly SceneData _sceneData;
 
     [Inject]
-    public BaseInitiator(SceneTransitionManager transitionManager, SceneData sceneData)
+    public BaseInitiator(SceneFlowController sceneFlow, SceneData sceneData)
     {
-        _transitionManager = transitionManager;
+        _sceneFlow = sceneFlow;
         _sceneData = sceneData;
     }
 
     public async UniTask GameInitialize(CancellationToken token)
     {
-        List<string> scenesToLoad = new List<string>();
+        token.ThrowIfCancellationRequested();
+
 #if UNITY_EDITOR
-        string reqPath = CoreBootStrap.RequestedStartScenePath;
-        string reqName = CoreBootStrap.RequestedStartSceneName;
-
-        if (!string.IsNullOrEmpty(reqPath) && !reqName.Contains("BaseScene") && ToolbarPlayButtonsView.OnGetCoreMode)
+        if (ToolbarPlayButtonsView.OnGetCoreMode)
         {
-            scenesToLoad.Add(reqPath);
-
-            await _transitionManager.TransitionToScenes(scenesToLoad, token);
-            return;
+            var requestedSceneName = CoreBootStrap.RequestedStartSceneName;
+            if (_sceneData.TryGetState(requestedSceneName, out var requestedState))
+            {
+                if (requestedState != GameSceneState.Bootstrap)
+                {
+                    await _sceneFlow.GoToAsync(requestedState);
+                    return;
+                }
+            }
+            else if (!string.IsNullOrWhiteSpace(requestedSceneName))
+            {
+                Debug.LogWarning(
+                    $"[BaseInitiator] '{requestedSceneName}' is not registered in SceneData. Loading Title instead.");
+            }
         }
 #endif
-        scenesToLoad.Add(_sceneData.HomeScenePath);
-        await _transitionManager.TransitionToScenes(scenesToLoad, token);
+
+        await _sceneFlow.GoToTitleAsync();
     }
 }

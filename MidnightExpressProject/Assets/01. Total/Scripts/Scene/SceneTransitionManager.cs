@@ -1,81 +1,159 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 
-public class SceneTransitionManager
+public sealed class SceneTransitionManager : IDisposable
 {
-    private readonly GameObject _loadingScreen;
-    private readonly SceneLoader _sceneLoader;
+    private readonly LoadingUIStarter _loadingUI;
+    private readonly CoreSceneLoader _sceneLoader;
+    private readonly CancellationTokenSource _lifetimeCts = new CancellationTokenSource();
+
+    private int _isTransitioning;
 
     [Inject]
-    public SceneTransitionManager(GameObject loadingScreen, SceneLoader sceneLoader)
+    public SceneTransitionManager(LoadingUIStarter loadingUI, CoreSceneLoader sceneLoader)
     {
-        _loadingScreen = loadingScreen;
+        _loadingUI = loadingUI;
         _sceneLoader = sceneLoader;
     }
 
-    // ✨ [수정] forceReload 매개변수를 추가해 줍니다. 기본값은 false.
-    public async UniTask TransitionToScenes(List<string> requestedScenes, CancellationToken token = default, bool forceReload = false)
+    public void Dispose()
     {
-        using (var loading = new LoadingUIStarter(_loadingScreen))
+        if (!_lifetimeCts.IsCancellationRequested)
         {
+            _lifetimeCts.Cancel();
+        }
+
+        _lifetimeCts.Dispose();
+    }
+
+    public async UniTask<bool> TransitionToScenesAsync(IReadOnlyList<string> requestedScenes)
+    {
+        var normalizedScenes = NormalizeRequestedScenes(requestedScenes);
+
+        if (Interlocked.CompareExchange(ref _isTransitioning, 1, 0) != 0)
+        {
+            Debug.LogWarning("[SceneTransition] A transition is already in progress. The duplicate request was ignored.");
+            return false;
+        }
+
+        try
+        {
+            if (SceneSetsMatch(_sceneLoader.LoadedScenes, normalizedScenes))
+            {
+                return true;
+            }
+
             try
             {
-                // ✨ [수정] 내부 함수로 forceReload 값을 넘겨줍니다.
-                await ApplySceneChangesAsync(requestedScenes, forceReload, token);
-                await UniTask.Delay(TimeSpan.FromSeconds(1));
+                await _loadingUI.ShowAsync(_lifetimeCts.Token);
+                await ApplySceneChangesAsync(normalizedScenes, _lifetimeCts.Token);
+                await _loadingUI.HideAsync(_lifetimeCts.Token);
             }
-            catch (OperationCanceledException)
+            finally
             {
-                Debug.Log("<color=yellow>[SceneTransition]</color> 씬 전환 작업 취소됨.");
+                _loadingUI.HideImmediate();
             }
-            catch (Exception e)
+
+            return true;
+        }
+        catch (OperationCanceledException) when (_lifetimeCts.IsCancellationRequested)
+        {
+            return false;
+        }
+        catch (Exception exception)
+        {
+            Debug.LogError("[SceneTransition] Scene transition failed.");
+            Debug.LogException(exception);
+            throw;
+        }
+        finally
+        {
+            Volatile.Write(ref _isTransitioning, 0);
+        }
+    }
+
+    private async UniTask ApplySceneChangesAsync(
+        IReadOnlyList<string> requestedScenes,
+        CancellationToken token)
+    {
+        var currentScenes = new List<string>(_sceneLoader.LoadedScenes);
+
+        for (var index = currentScenes.Count - 1; index >= 0; index--)
+        {
+            var sceneName = currentScenes[index];
+            if (!Contains(requestedScenes, sceneName))
             {
-                Debug.LogError($"<color=red>[SceneTransition]</color> 씬 전환 중 오류 발생 상세 로그:");
-                Debug.LogException(e); 
+                await _sceneLoader.UnloadSceneByNameAsync(sceneName, token);
+            }
+        }
+
+        for (var index = 0; index < requestedScenes.Count; index++)
+        {
+            var sceneName = requestedScenes[index];
+            if (!Contains(currentScenes, sceneName))
+            {
+                await _sceneLoader.LoadSceneByNameAsync(sceneName, token);
             }
         }
     }
 
-    // ✨ [수정] forceReload 매개변수 추가
-    private async UniTask ApplySceneChangesAsync(List<string> requestedScenes, bool forceReload, CancellationToken token)
+    private static List<string> NormalizeRequestedScenes(IReadOnlyList<string> requestedScenes)
     {
-        var currentScenes = _sceneLoader.LoadedScenes.ToList();
-
-        List<string> scenesToUnload;
-        List<string> scenesToLoad;
-
-        if (forceReload)
+        if (requestedScenes == null || requestedScenes.Count == 0)
         {
-            // ✨ 강제 재시작: 현재 씬을 모두 언로드 리스트에 넣고, 요청받은 씬을 전부 로드 리스트에 넣음
-            scenesToUnload = currentScenes.ToList(); 
-            scenesToLoad = requestedScenes.ToList();
-        }
-        else
-        {
-            // 기본 동작: 차집합 계산 (지울 씬, 새로 열 씬)
-            scenesToUnload = currentScenes.Except(requestedScenes).ToList();
-            scenesToLoad = requestedScenes.Except(currentScenes).ToList();
+            throw new ArgumentException("At least one target scene is required.", nameof(requestedScenes));
         }
 
-        // 불필요한 (혹은 재시작할) 씬 역순 언로드
-        for (int i = currentScenes.Count - 1; i >= 0; i--)
+        var result = new List<string>(requestedScenes.Count);
+        for (var index = 0; index < requestedScenes.Count; index++)
         {
-            string scenePath = currentScenes[i];
-            if (scenesToUnload.Contains(scenePath))
+            var sceneName = requestedScenes[index]?.Trim();
+            if (string.IsNullOrEmpty(sceneName))
             {
-                await _sceneLoader.UnloadSceneByPath(scenePath, token);
+                throw new ArgumentException("Target scene names cannot be empty.", nameof(requestedScenes));
+            }
+
+            if (!Contains(result, sceneName))
+            {
+                result.Add(sceneName);
             }
         }
 
-        // 새로운 (혹은 재시작할) 씬 로드
-        foreach (var scenePath in scenesToLoad)
+        return result;
+    }
+
+    private static bool SceneSetsMatch(IReadOnlyList<string> left, IReadOnlyList<string> right)
+    {
+        if (left.Count != right.Count)
         {
-            await _sceneLoader.LoadSceneByPath(scenePath, token);
+            return false;
         }
+
+        for (var index = 0; index < left.Count; index++)
+        {
+            if (!string.Equals(left[index], right[index], StringComparison.Ordinal))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private static bool Contains(IReadOnlyList<string> scenes, string sceneName)
+    {
+        for (var index = 0; index < scenes.Count; index++)
+        {
+            if (string.Equals(scenes[index], sceneName, StringComparison.Ordinal))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
