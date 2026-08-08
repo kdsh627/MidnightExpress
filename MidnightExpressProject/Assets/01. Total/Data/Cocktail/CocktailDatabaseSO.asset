@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a62b3d9298ba264fbb5799833a343f0, type: 3}
+  m_Name: CocktailDatabaseSO
+  m_EditorClassIdentifier: Assembly-CSharp::CocktailDatabaseSO
+  _ingredients:
+  - {fileID: 11400000, guid: 369642d46f06a284b966725fca44738d, type: 2}
+  - {fileID: 11400000, guid: 9a150f7494e8eea4b8bf47eee2c618e8, type: 2}
+  - {fileID: 11400000, guid: 9287318c3e7e793449140e141b10a355, type: 2}
+  - {fileID: 11400000, guid: db60ee57a6ef59747856f7de2a62cc2e, type: 2}
+  - {fileID: 11400000, guid: 3c04eab7d09a40c41b48a14d475123d8, type: 2}
+  - {fileID: 11400000, guid: d0db0ad88b685504b99206cae1840e70, type: 2}
+  - {fileID: 11400000, guid: d66915eaaa602bb419ac87a3348e3cd1, type: 2}
+  - {fileID: 11400000, guid: a4fbcf387e90e994baf9004153f94218, type: 2}
+  - {fileID: 11400000, guid: 4608d354fa2ae6146a478af79d654dfb, type: 2}
+  - {fileID: 11400000, guid: 9ac447710b5fe214085fcaa4a74b9018, type: 2}
+  - {fileID: 11400000, guid: 4901271fd39f62140922fe9ae9d3cf8d, type: 2}
+  - {fileID: 11400000, guid: cc36041fc7da7854ba43e7c6e2406ab0, type: 2}
+  - {fileID: 11400000, guid: 08b998a255dda8b468acf40c707c078b, type: 2}
+  - {fileID: 11400000, guid: cada17653879998499d2de218abe13cc, type: 2}
+  - {fileID: 11400000, guid: 36978daad46f06e4da978f9311632dcc, type: 2}
+  - {fileID: 11400000, guid: b515d26c67157d6428ba970a58776ad3, type: 2}
+  - {fileID: 11400000, guid: b2f2fcbebaf94ef488911c86701ee0b8, type: 2}
+  - {fileID: 11400000, guid: 2c818b3d1f06b7343ab0355570a6be65, type: 2}
+  - {fileID: 11400000, guid: daefe43f54910784c8aff624a941086b, type: 2}
+  - {fileID: 11400000, guid: 83e20d477674b2d41880d6a1b2e27435, type: 2}
+  - {fileID: 11400000, guid: 20ab24739a78a7849930a0f630ee1767, type: 2}
+  - {fileID: 11400000, guid: d7c9ca29d4b1e934ab1a59ecf3858e25, type: 2}
+  - {fileID: 11400000, guid: b4cdff32ef156184eacb2e55b0e70c14, type: 2}
+  - {fileID: 11400000, guid: 25fcda0f00e3d604bb0bf8d4985001b8, type: 2}
+  - {fileID: 11400000, guid: fed0a94fa103ebf46b56a8229908be47, type: 2}
+  - {fileID: 11400000, guid: c1684f809d6c29b4aa80b889461bde64, type: 2}
+  _recipes:
+  - {fileID: 11400000, guid: b2c7ddd72233f614084d9c9827629c37, type: 2}
+  - {fileID: 11400000, guid: 24419ef9534869145b751cd3dab2a66a, type: 2}
+  - {fileID: 11400000, guid: 510c6b5638b63a544a95d62426537b59, type: 2}
+  - {fileID: 11400000, guid: a6d8db6ce64ada54d881b88be609bca1, type: 2}
+  - {fileID: 11400000, guid: 28689df41ceb6d8448572deb3a130bfd, type: 2}
+  - {fileID: 11400000, guid: aedc51bc29537e94780f85df1fc972ed, type: 2}
+  - {fileID: 11400000, guid: d3d0b9f0139aa584ca4fed9f711027a7, type: 2}
+  - {fileID: 11400000, guid: 85948653567a7f9498ea7aae014a0b4d, type: 2}
+  - {fileID: 11400000, guid: 4af4e1dfe8d726845b94d72cf6f2ba31, type: 2}
+  - {fileID: 11400000, guid: eba6b191784eed7409ae65ff88aea153, type: 2}
+  - {fileID: 11400000, guid: e0c63fc15e9e0ac49974026cfe335660, type: 2}
+  - {fileID: 11400000, guid: 226ef31c5ab31734189bd5b8c458d7fd, type: 2}
+  _guestPreferences: []
+  _bundles:
+  - {fileID: 11400000, guid: f715b2afb8dd10c42becdf5cb770941a, type: 2}

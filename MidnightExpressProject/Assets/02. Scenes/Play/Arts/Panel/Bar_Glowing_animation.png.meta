@@ -1,0 +1,486 @@
+fileFormatVersion: 2
+guid: d71e90e36540eaf439b2153f45991398
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3435260289170366306
+    second: Bar_Glowing_animation_0
+  - first:
+      213: -6410212187050213964
+    second: Bar_Glowing_animation_1
+  - first:
+      213: -1839978720224826604
+    second: Bar_Glowing_animation_2
+  - first:
+      213: 2220236555948715305
+    second: Bar_Glowing_animation_3
+  - first:
+      213: 368190200543197402
+    second: Bar_Glowing_animation_4
+  - first:
+      213: 8182796534063628912
+    second: Bar_Glowing_animation_5
+  - first:
+      213: -617122686216142255
+    second: Bar_Glowing_animation_6
+  - first:
+      213: 1577539940691385759
+    second: Bar_Glowing_animation_7
+  - first:
+      213: 1140010878749884215
+    second: Bar_Glowing_animation_8
+  - first:
+      213: -1206276264926671967
+    second: Bar_Glowing_animation_9
+  - first:
+      213: -4620660552338286398
+    second: Bar_Glowing_animation_10
+  - first:
+      213: -8718411135630395300
+    second: Bar_Glowing_animation_11
+  - first:
+      213: -7195828504779058907
+    second: Bar_Glowing_animation_12
+  - first:
+      213: -3134118870726197126
+    second: Bar_Glowing_animation_13
+  - first:
+      213: 6562551387249096819
+    second: Bar_Glowing_animation_14
+  - first:
+      213: -649367379447578230
+    second: Bar_Glowing_animation_15
+  - first:
+      213: -6349239872741309807
+    second: Bar_Glowing_animation_16
+  - first:
+      213: 2312601021513981614
+    second: Bar_Glowing_animation_17
+  - first:
+      213: 3861485573128358593
+    second: Bar_Glowing_animation_18
+  - first:
+      213: -2311273267347331377
+    second: Bar_Glowing_animation_19
+  - first:
+      213: 1274973151586910270
+    second: Bar_Glowing_animation_20
+  - first:
+      213: 7740752936193690711
+    second: Bar_Glowing_animation_21
+  - first:
+      213: -5799551815330639023
+    second: Bar_Glowing_animation_22
+  - first:
+      213: -3258736725662316701
+    second: Bar_Glowing_animation_23
+  - first:
+      213: -844146997080503242
+    second: Bar_Glowing_animation_24
+  - first:
+      213: -809837182601358529
+    second: Bar_Glowing_animation_25
+  - first:
+      213: 5091947517345499881
+    second: Bar_Glowing_animation_26
+  - first:
+      213: 470371134406567399
+    second: Bar_Glowing_animation_27
+  - first:
+      213: -335107180264536927
+    second: Bar_Glowing_animation_28
+  - first:
+      213: 5447824118323040456
+    second: Bar_Glowing_animation_29
+  - first:
+      213: 4912690334638165093
+    second: Bar_Glowing_animation_30
+  - first:
+      213: -3161646619858231805
+    second: Bar_Glowing_animation_31
+  - first:
+      213: -7183695949319228392
+    second: Bar_Glowing_animation_32
+  - first:
+      213: -8882150299831913984
+    second: Bar_Glowing_animation_33
+  - first:
+      213: -4322337383457369246
+    second: Bar_Glowing_animation_34
+  - first:
+      213: 5310530273112509156
+    second: Bar_Glowing_animation_35
+  - first:
+      213: 7737328576568704484
+    second: Bar_Glowing_animation_36
+  - first:
+      213: -7646104659943253372
+    second: Bar_Glowing_animation_37
+  - first:
+      213: -1076172763207347826
+    second: Bar_Glowing_animation_38
+  - first:
+      213: 3984794748091095451
+    second: Bar_Glowing_animation_39
+  - first:
+      213: -1781583135804567129
+    second: Bar_Glowing_animation_40
+  - first:
+      213: 7440121930241204636
+    second: Bar_Glowing_animation_41
+  - first:
+      213: 3354839461114009261
+    second: Bar_Glowing_animation_42
+  - first:
+      213: -4989050028605965657
+    second: Bar_Glowing_animation_43
+  - first:
+      213: 6384176705245559287
+    second: Bar_Glowing_animation_44
+  - first:
+      213: 5935432146872222839
+    second: Bar_Glowing_animation_45
+  - first:
+      213: -4530791403364049492
+    second: Bar_Glowing_animation_46
+  - first:
+      213: 3153545340858833753
+    second: Bar_Glowing_animation_47
+  - first:
+      213: -7241840576286870300
+    second: Bar_Glowing_animation_48
+  - first:
+      213: 2269454015216971541
+    second: Bar_Glowing_animation_49
+  - first:
+      213: -2176773717461701021
+    second: Bar_Glowing_animation_50
+  - first:
+      213: 8354509302391891672
+    second: Bar_Glowing_animation_51
+  - first:
+      213: -9219845732040497201
+    second: Bar_Glowing_animation_52
+  - first:
+      213: -3461506413976251291
+    second: Bar_Glowing_animation_53
+  - first:
+      213: -1542695391896913539
+    second: Bar_Glowing_animation_54
+  - first:
+      213: -1094645356044343852
+    second: Bar_Glowing_animation_55
+  - first:
+      213: -6989282555759247317
+    second: Bar_Glowing_animation_56
+  - first:
+      213: -4199654461124442435
+    second: Bar_Glowing_animation_57
+  - first:
+      213: -1146404847164180879
+    second: Bar_Glowing_animation_58
+  - first:
+      213: -8358356205579374748
+    second: Bar_Glowing_animation_59
+  - first:
+      213: 6336603975094198280
+    second: Bar_Glowing_animation_60
+  - first:
+      213: -2771952745413362291
+    second: Bar_Glowing_animation_61
+  - first:
+      213: -3184445441507934366
+    second: Bar_Glowing_animation_62
+  - first:
+      213: 16548843896959466
+    second: Bar_Glowing_animation_63
+  - first:
+      213: -4103215659614210099
+    second: Bar_Glowing_animation_64
+  - first:
+      213: 9079417194755347171
+    second: Bar_Glowing_animation_65
+  - first:
+      213: -7314750511273854211
+    second: Bar_Glowing_animation_66
+  - first:
+      213: 5617551842385167832
+    second: Bar_Glowing_animation_67
+  - first:
+      213: 8885369246952280775
+    second: Bar_Glowing_animation_68
+  - first:
+      213: -7407433622542432068
+    second: Bar_Glowing_animation_69
+  - first:
+      213: -7456159444852288135
+    second: Bar_Glowing_animation_70
+  - first:
+      213: 3389997418648772903
+    second: Bar_Glowing_animation_71
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Bar_Glowing_animation_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e90aef0c7f08350d0800000000000000
+      internalID: -3435260289170366306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bar_Glowing_animation_1
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 0
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4bdfdf78af95a07a0800000000000000
+      internalID: -6410212187050213964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bar_Glowing_animation_2
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 0
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41ba8b24a151776e0800000000000000
+      internalID: -1839978720224826604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bar_Glowing_animation_3
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 0
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92de8a2626ddfce10800000000000000
+      internalID: 2220236555948715305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bar_Glowing_animation_4
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 0
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad8382169031c1500800000000000000
+      internalID: 368190200543197402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bar_Glowing_animation_5
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 0
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 072092ae7122f8170800000000000000
+      internalID: 8182796534063628912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 110c83424d614b046ae01dd9c57a1723
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":6.0,"y":1.0},"gridSpriteSize":{"x":300.0,"y":300.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Bar_Glowing_animation_0: -3435260289170366306
+      Bar_Glowing_animation_1: -6410212187050213964
+      Bar_Glowing_animation_2: -1839978720224826604
+      Bar_Glowing_animation_3: 2220236555948715305
+      Bar_Glowing_animation_4: 368190200543197402
+      Bar_Glowing_animation_5: 8182796534063628912
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

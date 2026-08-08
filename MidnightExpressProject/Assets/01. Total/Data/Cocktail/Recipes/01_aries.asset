@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4b57ad933df5645a6ab76f9b051e6b, type: 3}
+  m_Name: 01_aries
+  m_EditorClassIdentifier: Assembly-CSharp::CocktailRecipeDataSO
+  _id: aries
+  _displayOrder: 1
+  _constellation: "\uC591\uC790\uB9AC"
+  _cocktailName: "\uCCAB \uC720\uC131\uC758 \uCDA9\uB3CC"
+  _subtitle: "\uC591\uC790\uB9AC"
+  _emotionKeyword: "\uC5F4\uC815"
+  _tasteKeywords:
+  - "\uC2A4\uD30C\uC774\uC2DC"
+  - "\uC2DC\uD2B8\uB7EC\uC2A4"
+  _oneLineDescription: "\uC720\uC131\uC774 \uBC24\uD558\uB298\uC744 \uAC00\uB974\uB2E4
+    \uBCC4\uC5D0 \uBD80\uB52A\uD788\uB294 \uC21C\uAC04\uCC98\uB7FC, \uC9E7\uC9C0\uB9CC
+    \uC78A\uD788\uC9C0 \uC54A\uB294 \uD55C \uC794."
+  _base: {fileID: 11400000, guid: db60ee57a6ef59747856f7de2a62cc2e, type: 2}
+  _mixer: {fileID: 11400000, guid: d0db0ad88b685504b99206cae1840e70, type: 2}
+  _modifier: {fileID: 11400000, guid: 08b998a255dda8b468acf40c707c078b, type: 2}
+  _technique: {fileID: 11400000, guid: 2c818b3d1f06b7343ab0355570a6be65, type: 2}
+  _garnish: {fileID: 11400000, guid: d7c9ca29d4b1e934ab1a59ecf3858e25, type: 2}
+  _resultSprite: {fileID: 7223059988845925085, guid: 90374219fe5284844a8cba8e540a5d46, type: 3}
+  _hintSilhouette: {fileID: 0}
+  _tags:
+  - zodiac
+  - "\uC591\uC790\uB9AC"
+  _hidden: 0

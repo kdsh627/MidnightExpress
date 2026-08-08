@@ -11,6 +11,7 @@ public sealed class EntryPoint : IInitializable, IAsyncStartable, IDisposable
     private readonly SceneInitializationRegistry _initializationRegistry;
 
     private CancellationTokenSource _lifetimeCts;
+    private CancellationTokenSource _initializationCts;
 
     [Inject]
     public EntryPoint(
@@ -31,13 +32,14 @@ public sealed class EntryPoint : IInitializable, IAsyncStartable, IDisposable
     public async UniTask StartAsync(CancellationToken cancellation = default)
     {
         var sceneName = _scope.gameObject.scene.name;
-        using var linkedCts = CancellationTokenSource.CreateLinkedTokenSource(
+        _initializationCts?.Dispose();
+        _initializationCts = CancellationTokenSource.CreateLinkedTokenSource(
             cancellation,
             _lifetimeCts.Token);
 
         try
         {
-            await _initiator.GameInitialize(linkedCts.Token);
+            await _initiator.GameInitialize(_initializationCts.Token);
             _initializationRegistry.ReportReady(sceneName);
         }
         catch (OperationCanceledException exception)
@@ -60,6 +62,8 @@ public sealed class EntryPoint : IInitializable, IAsyncStartable, IDisposable
         }
 
         _lifetimeCts.Cancel();
+        _initializationCts?.Dispose();
+        _initializationCts = null;
         _lifetimeCts.Dispose();
         _lifetimeCts = null;
     }

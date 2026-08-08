@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4b57ad933df5645a6ab76f9b051e6b, type: 3}
+  m_Name: 02_taurus
+  m_EditorClassIdentifier: Assembly-CSharp::CocktailRecipeDataSO
+  _id: taurus
+  _displayOrder: 2
+  _constellation: "\uD669\uC18C\uC790\uB9AC"
+  _cocktailName: "\uD669\uAE08\uBE5B \uB178\uC744\uC744 \uBC14\uB77C\uBCF4\uBA70"
+  _subtitle: "\uD669\uC18C\uC790\uB9AC"
+  _emotionKeyword: "\uD48D\uC694"
+  _tasteKeywords:
+  - "\uB2EC\uCF64"
+  - "\uBD80\uB4DC\uB7EC\uC6C0"
+  _oneLineDescription: "\uB178\uC744\uC774 \uD558\uB8E8\uB97C \uCC9C\uCC9C\uD788
+    \uBB3C\uB4E4\uC774\uB4EF, \uB9C8\uC74C\uB3C4 \uC870\uC6A9\uD788 \uB530\uB73B\uD574\uC9C0\uB294
+    \uD55C \uC794."
+  _base: {fileID: 11400000, guid: 9287318c3e7e793449140e141b10a355, type: 2}
+  _mixer: {fileID: 11400000, guid: 4608d354fa2ae6146a478af79d654dfb, type: 2}
+  _modifier: {fileID: 11400000, guid: b515d26c67157d6428ba970a58776ad3, type: 2}
+  _technique: {fileID: 11400000, guid: 83e20d477674b2d41880d6a1b2e27435, type: 2}
+  _garnish: {fileID: 11400000, guid: c1684f809d6c29b4aa80b889461bde64, type: 2}
+  _resultSprite: {fileID: -6076986712777366304, guid: cf1f781b6ed38c045a0278285fd15ea8, type: 3}
+  _hintSilhouette: {fileID: 0}
+  _tags:
+  - zodiac
+  - "\uD669\uC18C\uC790\uB9AC"
+  _hidden: 0

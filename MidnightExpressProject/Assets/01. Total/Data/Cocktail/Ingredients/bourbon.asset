@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c21e3fb7a21c044b96ae7b9057193b6, type: 3}
+  m_Name: bourbon
+  m_EditorClassIdentifier: Assembly-CSharp::CocktailIngredientDataSO
+  _id: bourbon
+  _displayName: "\uBC84\uBC88"
+  _category: 0
+  _icon: {fileID: 21300000, guid: 173b0dc6711e9494594efa3212af277f, type: 3}
+  _unlockedByDefault: 1
+  _castingDialogueId: 0

@@ -7,17 +7,24 @@ public sealed class BaseInitiator : IInitiator
 {
     private readonly SceneFlowController _sceneFlow;
     private readonly SceneData _sceneData;
+    private readonly CocktailCollectionPersistence _cocktailCollectionPersistence;
 
     [Inject]
-    public BaseInitiator(SceneFlowController sceneFlow, SceneData sceneData)
+    public BaseInitiator(
+        SceneFlowController sceneFlow,
+        SceneData sceneData,
+        CocktailCollectionPersistence cocktailCollectionPersistence)
     {
         _sceneFlow = sceneFlow;
         _sceneData = sceneData;
+        _cocktailCollectionPersistence = cocktailCollectionPersistence ??
+            throw new System.ArgumentNullException(nameof(cocktailCollectionPersistence));
     }
 
     public async UniTask GameInitialize(CancellationToken token)
     {
         token.ThrowIfCancellationRequested();
+        System.GC.KeepAlive(_cocktailCollectionPersistence);
 
 #if UNITY_EDITOR
         if (ToolbarPlayButtonsView.OnGetCoreMode)

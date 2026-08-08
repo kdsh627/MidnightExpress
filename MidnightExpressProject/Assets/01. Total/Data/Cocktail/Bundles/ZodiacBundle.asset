@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62a58c80183255642af21079d7e4d1c4, type: 3}
+  m_Name: ZodiacBundle
+  m_EditorClassIdentifier: Assembly-CSharp::CocktailBundleDataSO
+  _id: zodiac
+  _displayName: "\uBCC4\uC790\uB9AC \uCE75\uD14C\uC77C"
+  _description: "\uC5F4\uB450 \uBCC4\uC790\uB9AC\uC758 \uC815\uC11C\uC640 \uB9DB\uC744
+    \uAE30\uB85D\uD558\uB294 \uCE75\uD14C\uC77C \uCEEC\uB809\uC158."
+  _recipes:
+  - {fileID: 11400000, guid: b2c7ddd72233f614084d9c9827629c37, type: 2}
+  - {fileID: 11400000, guid: 24419ef9534869145b751cd3dab2a66a, type: 2}
+  - {fileID: 11400000, guid: 510c6b5638b63a544a95d62426537b59, type: 2}
+  - {fileID: 11400000, guid: a6d8db6ce64ada54d881b88be609bca1, type: 2}
+  - {fileID: 11400000, guid: 28689df41ceb6d8448572deb3a130bfd, type: 2}
+  - {fileID: 11400000, guid: aedc51bc29537e94780f85df1fc972ed, type: 2}
+  - {fileID: 11400000, guid: d3d0b9f0139aa584ca4fed9f711027a7, type: 2}
+  - {fileID: 11400000, guid: 85948653567a7f9498ea7aae014a0b4d, type: 2}
+  - {fileID: 11400000, guid: 4af4e1dfe8d726845b94d72cf6f2ba31, type: 2}
+  - {fileID: 11400000, guid: eba6b191784eed7409ae65ff88aea153, type: 2}
+  - {fileID: 11400000, guid: e0c63fc15e9e0ac49974026cfe335660, type: 2}
+  - {fileID: 11400000, guid: 226ef31c5ab31734189bd5b8c458d7fd, type: 2}

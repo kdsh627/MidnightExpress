@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4b57ad933df5645a6ab76f9b051e6b, type: 3}
+  m_Name: 11_aquarius
+  m_EditorClassIdentifier: Assembly-CSharp::CocktailRecipeDataSO
+  _id: aquarius
+  _displayOrder: 11
+  _constellation: "\uBB3C\uBCD1\uC790\uB9AC"
+  _cocktailName: "\uC0C8\uBCBD \uC774\uC2AC\uC758 \uC544\uCE68 \uC778\uC0AC"
+  _subtitle: "\uBB3C\uBCD1\uC790\uB9AC"
+  _emotionKeyword: "\uCCAD\uB7C9"
+  _tasteKeywords:
+  - "\uAE68\uB057\uD568"
+  - "\uCCAD\uB7C9\uD568"
+  _oneLineDescription: "\uC0C8\uBCBD \uC774\uC2AC\uC774 \uD587\uC0B4\uC744 \uBA38\uAE08\uB294
+    \uC21C\uAC04\uCC98\uB7FC, \uB9D1\uAC8C \uAE68\uC5B4\uB098\uB294 \uD55C \uC794."
+  _base: {fileID: 11400000, guid: 9a150f7494e8eea4b8bf47eee2c618e8, type: 2}
+  _mixer: {fileID: 11400000, guid: 3c04eab7d09a40c41b48a14d475123d8, type: 2}
+  _modifier: {fileID: 11400000, guid: b2f2fcbebaf94ef488911c86701ee0b8, type: 2}
+  _technique: {fileID: 11400000, guid: 2c818b3d1f06b7343ab0355570a6be65, type: 2}
+  _garnish: {fileID: 11400000, guid: 25fcda0f00e3d604bb0bf8d4985001b8, type: 2}
+  _resultSprite: {fileID: 21300000, guid: 285da5ae2d58c8c4b914d8f65323414e, type: 3}
+  _hintSilhouette: {fileID: 0}
+  _tags:
+  - zodiac
+  - "\uBB3C\uBCD1\uC790\uB9AC"
+  _hidden: 0

@@ -1,0 +1,728 @@
+fileFormatVersion: 2
+guid: c98efb5226afc204d975e9b88412a8fd
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1192794575038623806
+    second: Bar_Cloud_0
+  - first:
+      213: -4149135572896639993
+    second: Bar_Cloud_1
+  - first:
+      213: -2626544597672645813
+    second: Bar_Cloud_2
+  - first:
+      213: -7854189790172398940
+    second: Bar_Cloud_3
+  - first:
+      213: -7948801585502750690
+    second: Bar_Cloud_4
+  - first:
+      213: 9005549190260167024
+    second: Bar_Cloud_5
+  - first:
+      213: 3382743763494376447
+    second: Bar_Cloud_6
+  - first:
+      213: 2774047877138410396
+    second: Bar_Cloud_7
+  - first:
+      213: -529347582832712390
+    second: Bar_Cloud_8
+  - first:
+      213: 6980991200800476423
+    second: Bar_Cloud_9
+  - first:
+      213: 3653023809998129468
+    second: Bar_Cloud_10
+  - first:
+      213: -8483258082887871043
+    second: Bar_Cloud_11
+  - first:
+      213: 5087113900589660617
+    second: Bar_Cloud_12
+  - first:
+      213: -6438935105544152411
+    second: Bar_Cloud_13
+  - first:
+      213: -8034615639856799797
+    second: Bar_Cloud_14
+  - first:
+      213: -4110617475078423170
+    second: Bar_Cloud_15
+  - first:
+      213: 635362803542241812
+    second: Bar_Cloud_16
+  - first:
+      213: 6268738791393108549
+    second: Bar_Cloud_17
+  - first:
+      213: -1413881181429483142
+    second: Bar_Cloud_18
+  - first:
+      213: 2513566142987801958
+    second: Bar_Cloud_19
+  - first:
+      213: 6268382631550092774
+    second: Bar_Cloud_20
+  - first:
+      213: 7910868970290317320
+    second: Bar_Cloud_21
+  - first:
+      213: 7337276591200109786
+    second: Bar_Cloud_22
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Bar_Cloud_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 867
+        width: 263
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cf4fc857a7527fe0800000000000000
+      internalID: -1192794575038623806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bar_Cloud_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 539
+        width: 1920
+        height: 399
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7041f84fd2f4b66c0800000000000000
+      internalID: -4149135572896639993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bar_Cloud_2
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 932
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4b200dba93ac8bd0800000000000000
+      internalID: -2626544597672645813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bar_Cloud_3
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 772
+        width: 875
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4aa3646cfff400390800000000000000
+      internalID: -7854189790172398940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bar_Cloud_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 283
+        width: 942
+        height: 296
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e18fb02921f20b190800000000000000
+      internalID: -7948801585502750690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bar_Cloud_5
+      rect:
+        serializedVersion: 2
+        x: 657
+        y: 361
+        width: 1263
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07193cc66432afc70800000000000000
+      internalID: 9005549190260167024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bar_Cloud_6
+      rect:
+        serializedVersion: 2
+        x: 1327
+        y: 526
+        width: 187
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff31045c78be1fe20800000000000000
+      internalID: 3382743763494376447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bar_Cloud_7
+      rect:
+        serializedVersion: 2
+        x: 727
+        y: 334
+        width: 257
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9be2c2c8d56f7620800000000000000
+      internalID: 2774047877138410396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bar_Cloud_8
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 303
+        width: 552
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a356b829d2167a8f0800000000000000
+      internalID: -529347582832712390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bar_Cloud_9
+      rect:
+        serializedVersion: 2
+        x: 1342
+        y: 255
+        width: 578
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70d07df928671e060800000000000000
+      internalID: 6980991200800476423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bar_Cloud_10
+      rect:
+        serializedVersion: 2
+        x: 469
+        y: 262
+        width: 178
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c398bf6fcc522b230800000000000000
+      internalID: 3653023809998129468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bar_Cloud_11
+      rect:
+        serializedVersion: 2
+        x: 959
+        y: 279
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db5d18748b9654a80800000000000000
+      internalID: -8483258082887871043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bar_Cloud_12
+      rect:
+        serializedVersion: 2
+        x: 973
+        y: 251
+        width: 417
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c93990d32f099640800000000000000
+      internalID: 5087113900589660617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bar_Cloud_13
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 215
+        width: 124
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5aa9f3ee2ae44a6a0800000000000000
+      internalID: -6438935105544152411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bar_Cloud_14
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 229
+        width: 257
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcf998f05af4f7090800000000000000
+      internalID: -8034615639856799797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bar_Cloud_15
+      rect:
+        serializedVersion: 2
+        x: 590
+        y: 234
+        width: 13
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7dff667f2724f6c0800000000000000
+      internalID: -4110617475078423170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bar_Cloud_16
+      rect:
+        serializedVersion: 2
+        x: 603
+        y: 219
+        width: 162
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 412b1a08a1341d800800000000000000
+      internalID: 635362803542241812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bar_Cloud_17
+      rect:
+        serializedVersion: 2
+        x: 1318
+        y: 209
+        width: 425
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 542a2b2b7b80ff650800000000000000
+      internalID: 6268738791393108549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bar_Cloud_18
+      rect:
+        serializedVersion: 2
+        x: 1748
+        y: 226
+        width: 15
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a79394a7e82e06ce0800000000000000
+      internalID: -1413881181429483142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bar_Cloud_19
+      rect:
+        serializedVersion: 2
+        x: 1768
+        y: 228
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6659c30f61bf1e220800000000000000
+      internalID: 2513566142987801958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bar_Cloud_20
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 219
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e585c5cac4cdf650800000000000000
+      internalID: 6268382631550092774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bar_Cloud_21
+      rect:
+        serializedVersion: 2
+        x: 777
+        y: 222
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80880d63a6d09cd60800000000000000
+      internalID: 7910868970290317320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bar_Cloud_22
+      rect:
+        serializedVersion: 2
+        x: 1305
+        y: 224
+        width: 15
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad485456f2e33d560800000000000000
+      internalID: 7337276591200109786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Bar_Cloud_0: -1192794575038623806
+      Bar_Cloud_1: -4149135572896639993
+      Bar_Cloud_10: 3653023809998129468
+      Bar_Cloud_11: -8483258082887871043
+      Bar_Cloud_12: 5087113900589660617
+      Bar_Cloud_13: -6438935105544152411
+      Bar_Cloud_14: -8034615639856799797
+      Bar_Cloud_15: -4110617475078423170
+      Bar_Cloud_16: 635362803542241812
+      Bar_Cloud_17: 6268738791393108549
+      Bar_Cloud_18: -1413881181429483142
+      Bar_Cloud_19: 2513566142987801958
+      Bar_Cloud_2: -2626544597672645813
+      Bar_Cloud_20: 6268382631550092774
+      Bar_Cloud_21: 7910868970290317320
+      Bar_Cloud_22: 7337276591200109786
+      Bar_Cloud_3: -7854189790172398940
+      Bar_Cloud_4: -7948801585502750690
+      Bar_Cloud_5: 9005549190260167024
+      Bar_Cloud_6: 3382743763494376447
+      Bar_Cloud_7: 2774047877138410396
+      Bar_Cloud_8: -529347582832712390
+      Bar_Cloud_9: 6980991200800476423
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

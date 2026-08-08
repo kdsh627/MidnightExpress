@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4b57ad933df5645a6ab76f9b051e6b, type: 3}
+  m_Name: 05_leo
+  m_EditorClassIdentifier: Assembly-CSharp::CocktailRecipeDataSO
+  _id: leo
+  _displayOrder: 5
+  _constellation: "\uC0AC\uC790\uC790\uB9AC"
+  _cocktailName: "\uC5EC\uB984\uC744 \uB2EE\uC740 \uCCAD\uCD98"
+  _subtitle: "\uC0AC\uC790\uC790\uB9AC"
+  _emotionKeyword: "\uCCAD\uCD98"
+  _tasteKeywords:
+  - "\uBC1D\uC74C"
+  - "\uC0C1\uD07C\uD568"
+  _oneLineDescription: "\uD587\uC0B4 \uC544\uB798 \uAC00\uC7A5 \uB208\uBD80\uC168\uB358
+    \uACC4\uC808\uC744 \uBCD1\uC5D0 \uB2F4\uC544\uB0B8 \uD55C \uC794."
+  _base: {fileID: 11400000, guid: 9a150f7494e8eea4b8bf47eee2c618e8, type: 2}
+  _mixer: {fileID: 11400000, guid: 9ac447710b5fe214085fcaa4a74b9018, type: 2}
+  _modifier: {fileID: 11400000, guid: cada17653879998499d2de218abe13cc, type: 2}
+  _technique: {fileID: 11400000, guid: daefe43f54910784c8aff624a941086b, type: 2}
+  _garnish: {fileID: 11400000, guid: d7c9ca29d4b1e934ab1a59ecf3858e25, type: 2}
+  _resultSprite: {fileID: 3856611404379689506, guid: 63cc7fe86edd7684da7cb0f71ad45289, type: 3}
+  _hintSilhouette: {fileID: 0}
+  _tags:
+  - zodiac
+  - "\uC0AC\uC790\uC790\uB9AC"
+  _hidden: 0

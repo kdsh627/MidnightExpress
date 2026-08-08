@@ -3,52 +3,118 @@ using System.Collections.Generic;
 using ExcelData;
 using VContainer;
 
-public class DialogueDB
+public sealed class DialogueDB
 {
-    private Dictionary<Type, object> _databases = new();
+    private readonly Dictionary<int, PreCastingDialogueData> _preCastingDialogues;
+    private readonly Dictionary<int, CastingDialogueData> _castingDialogues;
 
     [Inject]
     public DialogueDB(DialogueDataSO dialogueData)
     {
-        RegisterDatabase<DialogueClass>(dialogueData.Dialogue, item => item.ID);
-        RegisterDatabase<CameraClass>(dialogueData.Camera, item => item.ID);
-        RegisterDatabase<AnimationClass>(dialogueData.Animation, item => item.ID);
-        RegisterDatabase<ScriptClass>(dialogueData.Script, item => item.ID);
-        RegisterDatabase<BubbleClass>(dialogueData.Bubble, item => item.ID);
-        RegisterDatabase<SelectClass>(dialogueData.Select, item => item.ID);
-        RegisterDatabase<ParallelClass>(dialogueData.Parallel, item => item.ID);
-    }
-
-    private void RegisterDatabase<T>(IEnumerable<T> sourceList, Func<T, int> keySelector)
-    {
-        if (sourceList == null) return;
-
-        Dictionary<int, T> newDictionary = new Dictionary<int, T>();
-
-        foreach (T item in sourceList)
+        if (dialogueData == null)
         {
-            int key = keySelector(item);
-
-            newDictionary.Add(key, item);
+            throw new ArgumentNullException(
+                nameof(dialogueData),
+                "DialogueDB requires a DialogueDataSO instance.");
         }
 
-        _databases.Add(typeof(T), newDictionary);
+        try
+        {
+            dialogueData.ValidateImportedData();
+        }
+        catch (Exception exception)
+        {
+            throw new InvalidOperationException(
+                $"DialogueDataSO '{dialogueData.name}' failed runtime validation. {exception.Message}",
+                exception);
+        }
+
+        _preCastingDialogues = CreateDatabase(
+            dialogueData.PreCastingDialogues,
+            item => item.ID,
+            "Pre-CastingDialogue");
+
+        _castingDialogues = CreateDatabase(
+            dialogueData.CastingDialogues,
+            item => item.ID,
+            "CastingDialogue");
     }
 
-    public T GetData<T>(int id) where T : class
+    public bool TryGetPreCastingDialogue(int id, out PreCastingDialogueData dialogue)
     {
-        Type type = typeof(T);
+        return _preCastingDialogues.TryGetValue(id, out dialogue);
+    }
 
-        if (_databases.TryGetValue(type, out object db))
+    public PreCastingDialogueData GetPreCastingDialogue(int id)
+    {
+        if (TryGetPreCastingDialogue(id, out PreCastingDialogueData dialogue))
         {
-            Dictionary<int, T> typedDict = (Dictionary<int, T>)db;
+            return dialogue;
+        }
 
-            if (typedDict.TryGetValue(id, out T value))
+        throw CreateNotFoundException("Pre-CastingDialogue", id);
+    }
+
+    public bool TryGetCastingDialogue(int id, out CastingDialogueData dialogue)
+    {
+        return _castingDialogues.TryGetValue(id, out dialogue);
+    }
+
+    public CastingDialogueData GetCastingDialogue(int id)
+    {
+        if (TryGetCastingDialogue(id, out CastingDialogueData dialogue))
+        {
+            return dialogue;
+        }
+
+        throw CreateNotFoundException("CastingDialogue", id);
+    }
+
+    private static Dictionary<int, T> CreateDatabase<T>(
+        IEnumerable<T> source,
+        Func<T, int> keySelector,
+        string sheetName)
+        where T : class
+    {
+        var database = new Dictionary<int, T>();
+
+        if (source == null)
+        {
+            throw new InvalidOperationException(
+                $"DialogueDataSO [{sheetName}] list is null. Reimport DialogueData.xlsx.");
+        }
+
+        int index = 0;
+        foreach (T item in source)
+        {
+            index++;
+
+            if (item == null)
             {
-                return value;
+                throw new InvalidOperationException(
+                    $"DialogueDataSO [{sheetName}] item {index} is null. Reimport DialogueData.xlsx.");
+            }
+
+            int id = keySelector(item);
+            if (id <= 0)
+            {
+                throw new InvalidOperationException(
+                    $"DialogueDataSO [{sheetName}] contains invalid ID {id}. IDs must be greater than zero.");
+            }
+
+            if (!database.TryAdd(id, item))
+            {
+                throw new InvalidOperationException(
+                    $"DialogueDataSO [{sheetName}] contains duplicate ID {id}. Check DialogueData.xlsx.");
             }
         }
 
-        return null;
+        return database;
+    }
+
+    private static KeyNotFoundException CreateNotFoundException(string sheetName, int id)
+    {
+        return new KeyNotFoundException(
+            $"Dialogue ID {id} was not found in [{sheetName}]. Check DialogueData.xlsx and DialogueDataSO.");
     }
 }
